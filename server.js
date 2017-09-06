@@ -1,0 +1,1 @@
+console.log('Just simple server.js file');
