@@ -1,12 +1,30 @@
-pipeline {
-    agent any
-    stages {
-        stage('Example') {
-            steps {
-                nodejs(nodeJSInstallationName: 'Node 6.x', configId: '<config-file-provider-id>') {
-                    sh 'npm config ls'
-                }
-            }
-        }
+node('node') {
+
+
+    currentBuild.result = "SUCCESS"
+
+    try {
+
+       stage('Checkout'){
+          checkout scm
+       }
+
+       stage('Test'){
+
+         env.NODE_ENV = "test"
+
+         print "Environment will be : ${env.NODE_ENV}"
+
+         sh 'node -v'
+
+       }
+
+
+
     }
+    catch (err) {
+
+      echo 'Jenkinsfile error'
+    }
+
 }
